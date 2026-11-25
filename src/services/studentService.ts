@@ -24,7 +24,16 @@ export interface StudentVerificationService {
 }
 
 export const studentService: StudentVerificationService = {
-  async verifyStudent() {
+  async verifyStudent(request) {
+    if (
+      !request.schoolName.trim() ||
+      !request.matricNumber.trim() ||
+      !request.dateOfBirth
+    ) {
+      throw new Error("School, matric number, and date of birth are required.");
+    }
+
+    // Verification must be performed by a trusted server, never by querying the private registry from the browser.
     return { status: "not_configured" };
   },
 };
