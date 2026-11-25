@@ -118,7 +118,7 @@ const Header = () => {
     },
     {
       title: "Payment history",
-      subtitle: "View all payment history",
+      subtitle: "Transaction records unavailable",
       icon: history,
       type: "link",
     },
@@ -415,7 +415,7 @@ const Header = () => {
               />
             ) : (
               <p className="font-semibold text-[14px] text-[#1E3A8A]">
-                {personalDetails.fullName}
+                {personalDetails.fullName || "Not provided"}
               </p>
             )}
           </div>
@@ -433,7 +433,7 @@ const Header = () => {
               />
             ) : (
               <p className="font-semibold text-[14px] text-[#1E3A8A]">
-                {personalDetails.email}
+                {personalDetails.email || "Not provided"}
               </p>
             )}
           </div>
@@ -456,7 +456,7 @@ const Header = () => {
               />
             ) : (
               <p className="font-semibold text-[14px] text-[#1E3A8A]">
-                {personalDetails.phone}
+                {personalDetails.phone || "Not provided"}
               </p>
             )}
           </div>
@@ -477,7 +477,7 @@ const Header = () => {
               />
             ) : (
               <p className="font-semibold text-[14px] text-[#1E3A8A]">
-                {personalDetails.gender}
+                {personalDetails.gender || "Not provided"}
               </p>
             )}
           </div>
@@ -500,7 +500,7 @@ const Header = () => {
               />
             ) : (
               <p className="font-semibold text-[14px] text-[#1E3A8A]">
-                {personalDetails.dob}
+                {personalDetails.dob || "Not provided"}
               </p>
             )}
           </div>
@@ -521,7 +521,7 @@ const Header = () => {
               />
             ) : (
               <p className="font-semibold text-[14px] text-[#1E3A8A]">
-                {personalDetails.address}
+                {personalDetails.address || "Not provided"}
               </p>
             )}
           </div>
@@ -554,7 +554,7 @@ const Header = () => {
               />
             ) : (
               <p className="font-semibold text-[14px] text-[#1E3A8A]">
-                {personalDetails.contactName}
+                {personalDetails.contactName || "Not provided"}
               </p>
             )}
           </div>
@@ -577,7 +577,7 @@ const Header = () => {
               />
             ) : (
               <p className="font-semibold text-[14px] text-[#1E3A8A]">
-                {personalDetails.relationship}
+                {personalDetails.relationship || "Not provided"}
               </p>
             )}
           </div>
@@ -600,7 +600,7 @@ const Header = () => {
               />
             ) : (
               <p className="font-semibold text-[14px] text-[#1E3A8A]">
-                {personalDetails.contactPhone}
+                {personalDetails.contactPhone || "Not provided"}
               </p>
             )}
           </div>
@@ -621,7 +621,7 @@ const Header = () => {
               />
             ) : (
               <p className="font-semibold text-[14px] text-[#1E3A8A]">
-                {personalDetails.contactGender}
+                {personalDetails.contactGender || "Not provided"}
               </p>
             )}
           </div>
@@ -785,19 +785,15 @@ const Header = () => {
 
           <div className="flex bg-[#122354] w-full py-7.5 px-5 gap-5.5 rounded-[10px] h-26.25 mt-6 justify-between">
             <div className="flex flex-col gap-0.75 items-center text-center">
-              <p className="font-semibold text-white text-[16px]">₦10000.00</p>
-              <p className="font-normal text-[#9C9A9A] text-[12px]">
-                Total Paid
-              </p>
+              <p className="font-semibold text-white text-[14px]">Unavailable</p>
+              <p className="font-normal text-[#9C9A9A] text-[12px]">Total Paid</p>
             </div>
-
             <div className="flex flex-col gap-0.75 items-center text-center">
-              <p className="font-semibold text-white text-[16px]">6</p>
+              <p className="font-semibold text-white text-[14px]">Unavailable</p>
               <p className="font-normal text-[#9C9A9A] text-[12px]">Pending</p>
             </div>
-
             <div className="flex flex-col gap-0.75 items-center text-center">
-              <p className="font-semibold text-white text-[16px]">12</p>
+              <p className="font-semibold text-white text-[14px]">Unavailable</p>
               <p className="font-normal text-[#9C9A9A] text-[12px]">
                 Transactions
               </p>
