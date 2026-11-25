@@ -44,7 +44,7 @@ const PaymentSuccess = ({ onBackToHome }: PaymentSuccessProps) => {
         Payment Successful
       </p>
       <h2 className="font-semibold text-[24px] text-white text-center mb-1.5 ml-4">
-        Congratulations, Odafe! 🎉
+        Congratulations! 🎉
       </h2>
       <p className="font-normal text-[12px] text-[#A3AECF] text-center px-4">
         Your school fees has been paid successfully. You're all set for this

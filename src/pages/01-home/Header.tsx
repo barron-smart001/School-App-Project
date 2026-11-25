@@ -13,6 +13,7 @@ import cal from "../../assets/cal.svg";
 import dpt from "../../assets/dpt.svg";
 import lab from "../../assets/lab fee.svg";
 import lib from "../../assets/library.svg";
+import { useAuth } from "../../hooks/useAuth";
 
 const Header = ({
   onTransfer,
@@ -22,6 +23,7 @@ const Header = ({
   onTopUp: () => void;
 }) => {
   const [showBalance, setShowBalance] = useState(true);
+  const { user } = useAuth();
 
   const duePayments = [
     {
@@ -91,10 +93,10 @@ const Header = ({
               WELCOME BACK
             </h4>
             <p className="font-medium text-[14px] text-[#122354] truncate">
-              Odafe Samuel
+              {user?.email ?? "Student"}
             </p>
             <p className="font-medium text-[12px] text-[#6F6C6C] truncate">
-              Matric number : 19/112/0045
+              Student record not verified
             </p>
           </div>
         </div>

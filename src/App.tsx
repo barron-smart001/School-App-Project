@@ -11,6 +11,8 @@ import AccountSetUp from "./pages/00-onboarding/AccountSetUp";
 import SignIn from "./pages/00-onboarding/SignIn";
 import GetStarted from "./pages/00-onboarding/GetStarted";
 import Pin from "./pages/00-onboarding/Pin";
+import PasswordReset from "./pages/00-onboarding/PasswordReset";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Layout wrapper - Footer appears only on these pages
 const RootLayout = (): JSX.Element => {
@@ -55,17 +57,54 @@ const router = createBrowserRouter([
 
   {
     path: "/pin",
-    element: <Pin />,
+    element: (
+      <ProtectedRoute>
+        <Pin />
+      </ProtectedRoute>
+    ),
+  },
+
+  {
+    path: "/reset-password",
+    element: <PasswordReset />,
   },
 
   // Pages WITH footer
   {
     element: <RootLayout />,
     children: [
-      { path: "/home", element: <Home /> },
-      { path: "/fees", element: <Fees /> },
-      { path: "/history", element: <History /> },
-      { path: "/profile", element: <Profile /> },
+      {
+        path: "/home",
+        element: (
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/fees",
+        element: (
+          <ProtectedRoute>
+            <Fees />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/history",
+        element: (
+          <ProtectedRoute>
+            <History />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
