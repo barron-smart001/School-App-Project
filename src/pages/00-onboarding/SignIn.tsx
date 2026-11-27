@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import {
   getAuthErrorMessage,
+  isEmailNotConfirmedError,
   requestPasswordReset,
   resendSignupEmail,
   signIn,
@@ -24,6 +25,7 @@ const SignIn = () => {
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [isResetLoading, setIsResetLoading] = useState(false);
   const [isResendLoading, setIsResendLoading] = useState(false);
+  const [canResendVerification, setCanResendVerification] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
   const navigate = useNavigate();
@@ -40,6 +42,7 @@ const SignIn = () => {
     setIsLoginLoading(true);
     setErrorMessage("");
     setStatusMessage("");
+    setCanResendVerification(false);
     try {
       await signIn(email.trim(), password);
       const requestedPath = (
@@ -48,6 +51,7 @@ const SignIn = () => {
       navigate(requestedPath || "/home", { replace: true });
     } catch (error) {
       setErrorMessage(getAuthErrorMessage(error));
+      setCanResendVerification(isEmailNotConfirmedError(error));
     } finally {
       setIsLoginLoading(false);
     }
@@ -63,6 +67,7 @@ const SignIn = () => {
     setIsResetLoading(true);
     setErrorMessage("");
     setStatusMessage("");
+    setCanResendVerification(false);
     try {
       await requestPasswordReset(email.trim());
       setStatusMessage("If an account exists for this email, a reset link has been sent.");
@@ -85,6 +90,7 @@ const SignIn = () => {
     try {
       await resendSignupEmail(email.trim());
       setStatusMessage("A new verification email has been sent.");
+      setCanResendVerification(false);
     } catch (error) {
       setErrorMessage(getAuthErrorMessage(error));
     } finally {
@@ -125,6 +131,7 @@ const SignIn = () => {
               setEmail(event.target.value);
               setEmailError(false);
               setErrorMessage("");
+              setCanResendVerification(false);
             }}
             onBlur={() => {
               if (email && !isValidEmail(email)) setEmailError(true);
@@ -153,6 +160,7 @@ const SignIn = () => {
                 setPassword(event.target.value);
                 setPasswordError(false);
                 setErrorMessage("");
+                setCanResendVerification(false);
               }}
               onBlur={() => {
                 if (password && password.length < 8) setPasswordError(true);
@@ -204,8 +212,7 @@ const SignIn = () => {
           </div>
         )}
 
-        {errorMessage.toLowerCase().includes("verify the verification") ||
-        errorMessage.toLowerCase().includes("not verified yet") ? (
+        {canResendVerification ? (
           <button
             type="button"
             onClick={handleResendVerification}

@@ -14,6 +14,16 @@ function throwIfError(error: AuthError | null) {
   if (error) throw error;
 }
 
+export function isEmailNotConfirmedError(error: unknown): boolean {
+  if (!(error instanceof Error)) return false;
+
+  const code = "code" in error ? error.code : undefined;
+  return (
+    (typeof code === "string" && code.toLowerCase() === "email_not_confirmed") ||
+    error.message.toLowerCase().includes("email not confirmed")
+  );
+}
+
 export function getAuthErrorMessage(error: unknown): string {
   const message = error instanceof Error ? error.message : String(error);
   const normalized = message.toLowerCase();
